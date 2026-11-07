@@ -1,0 +1,12 @@
+{
+  "name": "ghw-builders-copilot-adventure",
+  "version": "1.0.0",
+  "description": "Interactive CLI & Web Choose-Your-Own-Adventure Incident Commander built with GitHub Copilot for MLH Global Hack Week: Builders Week",
+  "type": "module",
+  "scripts": {
+    "start": "node src/adventure.mjs",
+    "cli": "node src/adventure.mjs --cli"
+  },
+  "author": "Prince Jain",
+  "license": "MIT"
+}
