@@ -57,8 +57,7 @@ if (process.argv.includes("--cli")) {
   process.exit(0);
 }
 
-const PORT = Number(process.env.PORT || 4579);
-http.createServer((req, res) => {
+export function requestHandler(req, res) {
   const path = simulateAdventurePath();
   res.writeHead(200, { "content-type": "text/html; charset=utf-8" });
   res.end(`<!DOCTYPE html>
@@ -85,7 +84,7 @@ http.createServer((req, res) => {
         Choose Your Own Adventure: Production Incident Commander
       </h1>
       <p style="font-size:13px;color:#8b949e;margin-top:4px;">
-        Built with GitHub Copilot for MLH Global Hack Week: Builders Week (@princejain756)
+        Built with GitHub Copilot for MLH Global Hack Week: Builders Week (@princejain756) · Live on copilot-adventure.prince.sh
       </p>
     </div>
     <div style="font-family:monospace;font-size:12px;color:#3fb950;border:1px solid #238636;padding:6px 12px;border-radius:6px;">
@@ -101,6 +100,11 @@ http.createServer((req, res) => {
   `).join("")}
 </body>
 </html>`);
-}).listen(PORT, () => {
-  console.log(`Copilot Adventure running at http://localhost:${PORT}`);
-});
+}
+
+if (import.meta.url === `file://${process.argv[1]}`) {
+  const PORT = Number(process.env.PORT || 4579);
+  http.createServer(requestHandler).listen(PORT, () => {
+    console.log(`Copilot Adventure running at http://localhost:${PORT}`);
+  });
+}
